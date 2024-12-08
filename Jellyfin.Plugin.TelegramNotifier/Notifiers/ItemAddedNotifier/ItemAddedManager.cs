@@ -66,8 +66,8 @@ public class ItemAddedManager : IItemAddedManager
                     _logger.LogDebug("Notifying for {ItemName}", item.Name);
 
                     // Send notification.
-                    string message = $"🎬 {item.Name} ({item.ProductionYear})\n" +
-                                     $"      added to library";
+                    string message = $"🔹 NUEVA PELÍCULA 🔹\n" + "🎬 {item.Name} ({item.ProductionYear})\n" +
+                                     $"      Sinopsis:\n" + $"      {item.Overview}";
 
                     string subtype = "ItemAddedMovies";
                     bool addImage = true;
@@ -75,15 +75,15 @@ public class ItemAddedManager : IItemAddedManager
                     switch (item)
                     {
                         case Series serie:
-                            message = $"📺 [Serie] {serie.Name} ({item.ProductionYear}) added to library";
+                            message = $"🔸 NUEVA SERIE 🔸\n" + $"📺 {serie.Name} ({item.ProductionYear})\n" + $"📄 Sinopsis:\n" + $"      {serie.Overview}";
                             subtype = "ItemAddedSeries";
                             break;
 
                         case Season season:
                             string seasonNumber = season.IndexNumber.HasValue ? season.IndexNumber.Value.ToString("00", CultureInfo.InvariantCulture) : "00";
 
-                            message = $"📺 {season.Series.Name} ({item.ProductionYear})\n" +
-                                      $"      Season {seasonNumber} added to library";
+                            message = $"🔸 NUEVA TEMPORADA 🔸\n" + $"{season.Series.Name} ({item.ProductionYear})\n" +
+                                      $"      Temporada {seasonNumber}\n" + $"📄 Sinopsis:\n" + $"      {season.Overview}";
                             subtype = "ItemAddedSeasons";
                             break;
 
